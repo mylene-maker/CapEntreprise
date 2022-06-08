@@ -1,5 +1,6 @@
 package com.hb.capentreprise.entities;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,5 +190,6 @@ public class Game {
 	}
 	
 		
-	
+
+
 }
