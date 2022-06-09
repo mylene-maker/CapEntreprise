@@ -29,6 +29,11 @@ public class Genre {
 	public Genre() {
 		super();
 	}
+	
+	public Genre(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Genre(Long id, String name, List<Game> games) {
 		super();
@@ -63,6 +68,11 @@ public class Genre {
 
 	public void setGames(List<Game> games) {
 		this.games = games;
+	}
+
+	@Override
+	public String toString() {
+		return "Genre [id=" + id + ", name=" + name + "]";
 	}
 
 

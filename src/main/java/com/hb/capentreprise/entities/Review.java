@@ -46,6 +46,16 @@ public class Review {
 	public Review() {
 		super();
 	}
+	
+	public Review( String description, LocalDate sendDate, Float note, LocalDate moderationDate) {
+		super();
+		
+		this.description = description;
+		this.sendDate = sendDate;
+		this.note = note;
+		this.moderationDate = moderationDate;
+	
+	}
 
 	public Review(Long id, String description, LocalDate sendDate, Float note, LocalDate moderationDate, Game game,
 			Gamer gamer, Moderator moderator) {
@@ -122,6 +132,12 @@ public class Review {
 
 	public void setModerator(Moderator moderator) {
 		this.moderator = moderator;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", description=" + description + ", sendDate=" + sendDate + ", note=" + note
+				+ ", moderationDate=" + moderationDate + "]";
 	}
 	
 	

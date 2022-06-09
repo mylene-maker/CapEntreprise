@@ -29,7 +29,13 @@ public class Classification {
 	public Classification() {
 		super();
 	}
-
+	
+	public Classification( String name) {
+		super();
+	
+		this.name = name;
+	
+	}
 
 	public Classification(Long id, String name, List<Game> games) {
 		super();
@@ -60,6 +66,11 @@ public class Classification {
 
 	public void setGames(List<Game> games) {
 		this.games = games;
+	}
+
+	@Override
+	public String toString() {
+		return "Classification [id=" + id + ", name=" + name + "]";
 	}
 
 	
