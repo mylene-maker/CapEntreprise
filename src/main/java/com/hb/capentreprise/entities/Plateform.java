@@ -55,7 +55,7 @@ public class Plateform {
 	
 	@Override
 	public String toString() {
-		return "Plateform [id=" + id + ", name=" + name + ", games=" + games + "]";
+		return "Plateform [id=" + id + ", name=" + name + "]";
 	}
 	
 }

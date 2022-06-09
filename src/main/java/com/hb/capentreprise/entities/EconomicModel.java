@@ -63,7 +63,7 @@ public class EconomicModel {
 	
 	@Override
 	public String toString() {
-		return "EconomicModel [id=" + id + ", name=" + name + ", games=" + games + "]";
+		return "EconomicModel [id=" + id + ", name=" + name + "]";
 	}
 	
 }

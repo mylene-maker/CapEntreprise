@@ -44,7 +44,7 @@ public class Game {
 	
 	@ManyToOne
 	@JoinColumn(name = "classification_id")
-	private Classification classifaction;
+	private Classification classification;
 	
 	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
@@ -70,7 +70,7 @@ public class Game {
 	}
 	
 	public Game(Long id, String name, String description, LocalDate releaseDate, String picture, Genre genre,
-			Classification classifaction, List<Review> reviews, EconomicModel economicModel, List<Plateform> plateforms,
+			Classification classification, List<Review> reviews, EconomicModel economicModel, List<Plateform> plateforms,
 			Editor editor, Moderator moderator) {
 		super();
 		this.id = id;
@@ -79,7 +79,7 @@ public class Game {
 		this.releaseDate = releaseDate;
 		this.picture = picture;
 		this.genre = genre;
-		this.classifaction = classifaction;
+		this.classification = classification;
 		this.reviews = reviews;
 		this.economicModel = economicModel;
 		this.plateforms = plateforms;
@@ -135,12 +135,12 @@ public class Game {
 		this.genre = genre;
 	}
 
-	public Classification getClassifaction() {
-		return classifaction;
+	public Classification getClassification() {
+		return classification;
 	}
 
-	public void setClassifaction(Classification classifaction) {
-		this.classifaction = classifaction;
+	public void setClassification(Classification classification) {
+		this.classification = classification;
 	}
 
 	public List<Review> getReviews() {
