@@ -28,6 +28,7 @@ public class Editor {
 	public Editor() {
 		
 	}
+
 	public Editor(Long id, String name, List<Game> games) {
 		super();
 		this.id = id;

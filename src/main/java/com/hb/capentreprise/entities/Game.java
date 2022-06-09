@@ -79,7 +79,9 @@ public class Game {
 		this.releaseDate = releaseDate;
 		this.picture = picture;
 		this.genre = genre;
+
 		this.classification = classification;
+
 		this.reviews = reviews;
 		this.economicModel = economicModel;
 		this.plateforms = plateforms;
@@ -135,12 +137,14 @@ public class Game {
 		this.genre = genre;
 	}
 
+
 	public Classification getClassification() {
 		return classification;
 	}
 
 	public void setClassification(Classification classification) {
 		this.classification = classification;
+
 	}
 
 	public List<Review> getReviews() {
