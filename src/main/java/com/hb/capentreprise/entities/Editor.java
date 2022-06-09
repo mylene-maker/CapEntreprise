@@ -28,7 +28,7 @@ public class Editor {
 	public Editor() {
 		
 	}
-	
+
 	public Editor(Long id, String name, List<Game> games) {
 		super();
 		this.id = id;
@@ -63,7 +63,7 @@ public class Editor {
 
 	@Override
 	public String toString() {
-		return "Editor [id=" + id + ", name=" + name + ", games=" + games + "]";
+		return "Editor [id=" + id + ", name=" + name +"]";
 	}
 
 }
