@@ -49,7 +49,6 @@ public class PlateformService implements IPlateformService{
 			throw new NotFoundException();
 		}
 	}
-	
-	
+
 	
 }

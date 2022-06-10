@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+	
+		Id : <span th:text="${game.id}" />
+	<br>
+	Name : <span th:text="${game.name}" />
+	<br>
+	<img th:src="${game.picture}" alt="${game.name}" style="width:400px;height:300px">
+	<br>
+	Description : <span th:text="${game.description}" />
+	<br>
+ 	Date de sortie : <span th:text="${game.releaseDate}" />
+    <br>
+	Genre : <span th:text="${game.genre.name}" /> 
+	<br>
+ 	Classification : <span th:text="${game.classification.name}" /> 
+	<br>
+ 	Modéle économique : <span th:text="${game.economicModel.name}" /> 
+	<br>
+	Editeur : <span th:text="${game.editor.name}" /> 
+ 	<br>
+ 	Plateforme :
+	<ul>
+		<li th:each="comment: ${game.reviews}">
+			<span th:text="${review.description}"/>
+			<a th:href="@{/comment/{id}/post/{postId}(id=${comment.id}, postId=${post.id})}">Delete</a>
+		</li>	
+	</ul>
+	<br>
+	Avis  :
+	<ul>
+		<li th:each="comment: ${game.reviews}">
+			<span th:text="${review.description}"/>
+			<a th:href="@{/comment/{id}/post/{postId}(id=${comment.id}, postId=${post.id})}">Delete</a>
+		</li>	
+	</ul>
+	<br>
+	
+	
+	
+	
+	
 </body>
 </html>

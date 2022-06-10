@@ -186,6 +186,8 @@ public class Game {
 	public void setModerator(Moderator moderator) {
 		this.moderator = moderator;
 	}
+	
+	
 
 	@Override
 	public String toString() {
