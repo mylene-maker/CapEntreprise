@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Reviews</title>
+</head>
+<body>
+
+<table>
+		<thead>
+			<th>Date d'envoi</th>
+			<th>Nom du jeu</th>
+			<th>Pseudo du Joueur</th>
+			<th>Note</th>
+			<th>Image</th>
+			<th>Statut</th>
+			<th>Opérations</th>
+		</thead>
+		<tbody>
+			<tr th:each="review: ${reviews}">
+				<td><span th:text="${review.sendDate}"/></td>
+				<td><span th:text="${review.game.name}" /></td>
+				<td><span th:text="${review.gamer.pseudo}" /></td>
+				<td><span th:text="${review.note}" /></td>
+				<td><span th:text="${review.game.picture}" /></td>
+				<td>
+				 <span th:if="${review.moderator}">Modéré par <span th:text="${review.moderator.pseudo}" /></span>
+    			<span th:unless="${review.moderator}">A modérer</span>
+    			</td>
+				<td><a th:href="@{/review/{id}(id=${review.id})}">Voir</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

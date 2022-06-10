@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table>
+		<thead>
+			<th>Date d'envoi</th>
+			<th>Nom du jeu</th>
+			<th>Pseudo du Joueur</th>
+			<th>Note</th>
+			<th>Image</th>
+			<th>Description</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span th:text="${review.sendDate}"/></td>
+				<td><span th:text="${review.game.name}" /></td>
+				<td><span th:text="${review.gamer.pseudo}" /></td>
+				<td><span th:text="${review.note}" /></td>
+				<td><span th:text="${review.game.picture}" /></td>
+				<td><span th:text="${review.description}" /></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
