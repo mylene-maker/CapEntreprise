@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration page</title>
+</head>
+<body>
+
+	<div>
+
+
+		<form th:action="@{/inscription}" method="post">
+			<h1>Formulaire d'Inscription</h1>
+			<div>
+				<p>
+					<label for="username">Pseudonyme</label> <input type="text"
+						name="username" id="username" autofocus="autofocus" required>
+				</p>
+				<p>
+					<label for="email">E-mail</label> <input type="text" name="email"
+						id="email" required>
+				</p>
+				<p>
+					<label for="password">Mot De Passe</label> <input type="password"
+						name="password" id="password" required>
+				</p>
+				<p>
+					<label for="dateOfBirth">Date de naissance</label> <input
+						type="date" name="dateOfBirth" id="dateOfBirth" required>
+				</p>
+				<p>
+					<input type="submit" value="Inscription">
+				</p>
+			</div>
+	</div>
+
+
+</body>
+</html>
