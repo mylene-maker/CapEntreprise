@@ -36,24 +36,6 @@ public class EntryPoint implements CommandLineRunner{
 	
 		
 		
-		this.genreService.save(new Genre("genre 1"));
-		this.reviewService.save(new Review("Review 1",LocalDate.now(),10f,LocalDate.now() ));
-		
-	
-		genreService.getGenre((long) 3);
-		reviewService.getReview((long) 3);
-	
-		this.printGenre();
-		this.printReview();
-		
-		genreService.delete((long) 2);
-		reviewService.delete((long) 2);
-		
-		this.printGenre();
-		this.printReview();
-		
-
-		
 	}
 	
 	private void printClassification(){

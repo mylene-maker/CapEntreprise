@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<th>Id</th>
+			<th>Image</th>
+			<th>Nom</th>
+			<th>Editeur</th>
+			<th>Opérations</th>
+		</thead>
+		<tbody>
+			<tr th:each="game: ${games}">
+				<td><span th:text="${game.id}" /></td>
+				<td><img th:src="${game.picture}" alt="${game.name}" style="width:200px;height:100px"></td>
+				<td><span th:text="${game.name}" /></td>
+				<td><span th:text="${game.editor.name}" /></td>
+				<td><span/> test </td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
