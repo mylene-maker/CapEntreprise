@@ -2,12 +2,13 @@ package com.hb.capentreprise.service;
 
 import java.util.List;
 
+
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hb.capentreprise.entities.Classification;
 import com.hb.capentreprise.entities.Review;
 import com.hb.capentreprise.repositories.ReviewRepository;
 
@@ -39,6 +40,19 @@ public class ReviewService implements IReviewService{
 	@Override
 	public void delete(Long id) {
 		reviewRepository.deleteById(id);
+		
+	}
+	
+	
+	public  List<Review> getReviewsByGamer(Long id) {
+		Iterable<Review> reviews = reviewRepository.getReviewsByGamer(id);
+		return (List<Review>) reviews;
+		
+	}
+	
+	public  List<Review> getFilteredModaratedReviews(Long id) {
+		Iterable<Review> reviews = reviewRepository.getFilteredModaratedReviews(id);
+		return (List<Review>) reviews;
 		
 	}
 	

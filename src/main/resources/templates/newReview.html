@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>New review</title>
+</head>
+<body>
+<form method="post" th:action="@{/review}" th:object="${review}">
+			<label for="game-select">Jeu</label>
+		<select th:field="*{game}" id="game-select">
+		<option value="">Veuillez choisir</option>
+			<option th:each="game : ${games}" th:value="${game.id}"
+				th:text="${game.name}"></option>
+			</select></br>
+			<label for="description">Description</label>
+		  <textarea  rows="5"
+		  			id="description"			
+              		 placeholder="Description" 
+                      th:field="*{description}"
+                      required="required">
+          </textarea></br>
+          <label for="note">Note</label>
+		<input type="number" min=0 max=20 th:field="*{note}" id="note" /></br>
+		<button type="submit">Enregistrer</button>
+	</form>
+</body>
+</html>
