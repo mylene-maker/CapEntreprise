@@ -190,9 +190,6 @@ public class InitController {
 		gameService.save(game2);
 		
 		
-		
-		
-		
 	}
 	
 	
