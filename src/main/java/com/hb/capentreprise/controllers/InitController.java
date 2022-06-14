@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.hb.capentreprise.entities.Classification;
 import com.hb.capentreprise.entities.EconomicModel;
 import com.hb.capentreprise.entities.Editor;
@@ -18,6 +19,7 @@ import com.hb.capentreprise.entities.Gamer;
 import com.hb.capentreprise.entities.Genre;
 import com.hb.capentreprise.entities.Moderator;
 import com.hb.capentreprise.entities.Plateform;
+import com.hb.capentreprise.entities.Review;
 import com.hb.capentreprise.service.IClassificationService;
 import com.hb.capentreprise.service.IEconomicModelService;
 import com.hb.capentreprise.service.IEditorService;
@@ -26,10 +28,10 @@ import com.hb.capentreprise.service.IGamerService;
 import com.hb.capentreprise.service.IGenreService;
 import com.hb.capentreprise.service.IModeratorService;
 import com.hb.capentreprise.service.IPlateformService;
+import com.hb.capentreprise.service.IReviewService;
 
 @Controller
 public class InitController {
-	
 	
 	@Autowired
 	private IModeratorService moderatorService;
@@ -55,8 +57,9 @@ public class InitController {
 	@Autowired
 	private IGenreService genreService;
 	
-	
-	
+	@Autowired
+	private IReviewService reviewService;
+		
 	@GetMapping("/init")
 	public void initData() throws NotFoundException {
 		
@@ -160,7 +163,7 @@ public class InitController {
 		game.setGenre(genreGame);
 		game.setModerator(modeGame);
 		game.setName("Call Of Duty");
-		game.setPicture("pictureRoot");
+		game.setPicture("https://www.geekgeneration.fr/wp-content/uploads/2020/03/Call-of-Duty-Modern-Warfare-2-Campagne-Remasterise%CC%81e.jpg");
 		game.setPlateforms(plateformsGame);
 		game.setReleaseDate(releaseGame);
 		gameService.save(game);
@@ -184,15 +187,34 @@ public class InitController {
 		game2.setGenre(genreGame2);
 		game2.setModerator(modeGame2);
 		game2.setName("Final Fantasy");
-		game2.setPicture("pictureRoot");
+		game2.setPicture("https://jeu.video/wp-content/uploads/2016/09/kv_pc.jpg");
 		game2.setPlateforms(plateformsGame2);
 		game2.setReleaseDate(releaseGame2);
 		gameService.save(game2);
+
+		Review review1 = new Review();
+		review1.setDescription("review 1");
+		review1.setSendDate(LocalDate.now());
+		review1.setNote(10F);
+		review1.setModerationDate(LocalDate.now());
+		review1.setGame(game);
+		review1.setGamer(gamer);
+		review1.setModerator(moderator);
+		reviewService.save(review1);
 		
 		
+		Review review2 = new Review();
+		review2.setDescription("review 2");
+		review2.setSendDate(LocalDate.now());
+		review2.setNote(15F);
+		review2.setModerationDate(LocalDate.now());
+		review2.setGame(game2);
+		review2.setGamer(gamer2);
+		review2.setModerator(moderator2);
+		reviewService.save(review2);
+		
+								
+
 	}
 	
-	
-
-
 }

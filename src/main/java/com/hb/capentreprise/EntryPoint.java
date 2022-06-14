@@ -34,7 +34,7 @@ public class EntryPoint implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 	
-		
+
 		/*
 		this.genreService.save(new Genre("genre 1"));
 		this.reviewService.save(new Review("Review 1",LocalDate.now(),10f,LocalDate.now() ));

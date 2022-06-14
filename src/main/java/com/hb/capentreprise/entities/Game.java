@@ -35,7 +35,7 @@ public class Game {
 	@Column(nullable = false)
 	private LocalDate releaseDate;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,length=9999)
 	private String picture;
 	
 	@ManyToOne
@@ -186,6 +186,8 @@ public class Game {
 	public void setModerator(Moderator moderator) {
 		this.moderator = moderator;
 	}
+	
+	
 
 	@Override
 	public String toString() {
