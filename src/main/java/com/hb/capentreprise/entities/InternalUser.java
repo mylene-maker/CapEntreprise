@@ -1,14 +1,22 @@
 package com.hb.capentreprise.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class InternalUser {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
@@ -22,6 +30,10 @@ public class InternalUser {
 	
 	@Column(nullable = false)
 	private String email;
+	
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<InternalRole> roles = new ArrayList<>();
 
 	public InternalUser() {
 		
@@ -66,11 +78,20 @@ public class InternalUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<InternalRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<InternalRole> roles) {
+		this.roles = roles;
+	}
 
 	@Override
 	public String toString() {
 		return "InternalUser [id=" + id + ", pseudo=" + pseudo + ", password=" + password + ", email=" + email + "]";
 	}
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package com.hb.capentreprise.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,15 +18,24 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+		
+		// setting service to find user in database and setting passwordEncoder
+		
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		
 		// Creation of identifiers
 		
-		auth.inMemoryAuthentication()
+		/*auth.inMemoryAuthentication()
 		.withUser("Mylene").password(passwordEncoder().encode("saidousseni")).roles("USER")
 		.and()
-		.withUser("useradmin").password(passwordEncoder().encode("admin123")).roles("ADMIN", "USER");
+		.withUser("useradmin").password(passwordEncoder().encode("admin123")).roles("ADMIN", "USER");*/
 	}
+	
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -55,10 +65,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Bean 
 	public PersistentTokenRepository persistentTokenRepository() {
-		//token stored in Memory of web server
+		//token stored in Memory of web server (remember-me)
 		InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
 		return memory;
 		
 	}
+	
+	
 	
 }

@@ -191,7 +191,7 @@ public class InitController {
 		game2.setPlateforms(plateformsGame2);
 		game2.setReleaseDate(releaseGame2);
 		gameService.save(game2);
-		
+
 		Review review1 = new Review();
 		review1.setDescription("review 1");
 		review1.setSendDate(LocalDate.now());
@@ -214,6 +214,7 @@ public class InitController {
 		reviewService.save(review2);
 		
 								
+
 	}
 	
 }
