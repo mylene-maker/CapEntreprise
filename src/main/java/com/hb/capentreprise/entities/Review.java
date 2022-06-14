@@ -122,7 +122,7 @@ public class Review {
 		return gamer;
 	}
 
-	public void setPlayer(Gamer gamer) {
+	public void setGamer(Gamer gamer) {
 		this.gamer = gamer;
 	}
 

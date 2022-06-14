@@ -16,7 +16,7 @@ public class GameService implements IGameService {
 
 	@Override
 	public Game getGame(Long id) {
-		int i=id.intValue();
+		long i=id.intValue();
 		Game game = gameRepo.findById(i).get();
 		return game;
 	}
@@ -35,7 +35,7 @@ public class GameService implements IGameService {
 
 	@Override
 	public void delete(Long id) {
-		int i=id.intValue();
+		long i=id.intValue();
 		gameRepo.deleteById(i);
 		
 	}
