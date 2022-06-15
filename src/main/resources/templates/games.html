@@ -18,7 +18,7 @@
 			<tr th:each="game: ${games}">
 				<td><span th:text="${game.id}" /><td>
 				<img th:src="${game.picture}" alt="${game.name}" style="width:200px;height:100px">
-				<td><span th:text="${game.name}" /></td>
+				<td><a th:href="@{/game/}+${game.id}"><span th:text="${game.name}" /></a></td>
 				<td><span th:text="${game.editor.name}" /></td>
 				<td><span/> opérations à ajouter  </td>
 			</tr>
