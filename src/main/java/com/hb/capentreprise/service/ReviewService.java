@@ -109,5 +109,17 @@ public class ReviewService implements IReviewService{
 		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByNoteDsc(id);
 		return (List<Review>) reviews;
 	}
+
+	@Override
+	public List<Review> getModeratedReviews() {
+		Iterable<Review> reviews = reviewRepository.getModeratedReviews();
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getUnmoderatedReviews() {
+		Iterable<Review> reviews = reviewRepository.getUnmoderatedReviews();
+		return (List<Review>) reviews;
+	}
 	
 }

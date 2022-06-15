@@ -134,6 +134,22 @@ public class ReviewController {
 		return "moderatorReviews";
 	}
 	
+	@GetMapping("/moderator/filter/{filterMethod}")
+	public String getFilteredReviews(@PathVariable(name = "filterMethod") String filterMethod, Model model) {
+		List<Review> reviews = new ArrayList<Review>();
+		switch(filterMethod) {
+		case "modarated":
+			reviews.addAll(reviewService.getModeratedReviews());
+			break;
+			
+		case "notModarated":
+			reviews.addAll(reviewService.getUnmoderatedReviews());
+			break;
+		}
+		model.addAttribute("reviews", reviews);
+		return "moderatorReviews";
+	}
+	
 	@GetMapping("/moderator/{id}")
 	public String getModeratorReview(@PathVariable(name = "id") Long id,Model model) {
 		Review review =reviewService.getReview(id);		
