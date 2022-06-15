@@ -30,10 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		// Creation of identifiers
 		
-		auth.inMemoryAuthentication()
-		.withUser("jo").password(passwordEncoder().encode("jo")).roles("USER")
-		.and()
-		.withUser("ad").password(passwordEncoder().encode("ad")).roles("ADMIN", "USER");
+//		auth.inMemoryAuthentication()
+//		.withUser("jo").password(passwordEncoder().encode("jo")).roles("USER")
+//		.and()
+//		.withUser("ad").password(passwordEncoder().encode("ad")).roles("ADMIN", "USER");
 	}
 	
 	
@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		.antMatchers("/inscription").permitAll()
 		.antMatchers("/review", "/score").hasRole("USER")
-		.antMatchers("/review", "/review/delete", "/addGame", "/score").hasRole("ADMIN")
+		.antMatchers("/review", "/review/delete", "/addGame", "/score","game/new").hasRole("ADMIN")
 		.and()
 		.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home",true)
 		.and()

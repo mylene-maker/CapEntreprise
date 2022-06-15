@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>Liste des jeux </h1>
 	<table>
 		<thead>
 			<th>Id</th>
@@ -16,16 +16,18 @@
 		</thead>
 		<tbody>
 			<tr th:each="game: ${games}">
-				<td><span th:text="${game.id}" /></td>
-				<td><img th:src="${game.picture}" alt="${game.name}" style="width:200px;height:100px"></td>
+				<td><span th:text="${game.id}" /><td>
+				<img th:src="${game.picture}" alt="${game.name}" style="width:200px;height:100px">
 				<td><span th:text="${game.name}" /></td>
 				<td><span th:text="${game.editor.name}" /></td>
-				<td><span/> test </td>
+				<td><span/> opérations à ajouter  </td>
 			</tr>
 		</tbody>
 	</table>
 
-<a th:href="@{newGame.html}">ajouter un jeu</a>
+<a th:href="@{/game/new}">ajouter un jeu</a>
+<a th:href="@{/review}">liste des avis</a>
+
 
 </body>
 </html>
