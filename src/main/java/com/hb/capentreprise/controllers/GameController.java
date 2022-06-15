@@ -3,16 +3,33 @@ package com.hb.capentreprise.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.hb.capentreprise.service.EditorService;
+import com.hb.capentreprise.service.IClassificationService;
+import com.hb.capentreprise.service.IEconomicModelService;
+import com.hb.capentreprise.service.IEditorService;
 import com.hb.capentreprise.service.IGameService;
+import com.hb.capentreprise.service.IGenreService;
+import com.hb.capentreprise.service.IModeratorService;
 import com.hb.capentreprise.service.IPlateformService;
 import com.hb.capentreprise.service.IReviewService;
+import com.hb.capentreprise.entities.Classification;
+import com.hb.capentreprise.entities.EconomicModel;
+import com.hb.capentreprise.entities.Editor;
 import com.hb.capentreprise.entities.Game;
+import com.hb.capentreprise.entities.Gamer;
+import com.hb.capentreprise.entities.Genre;
+import com.hb.capentreprise.entities.Moderator;
 import com.hb.capentreprise.entities.Plateform;
 import com.hb.capentreprise.entities.Review;
 
@@ -30,6 +47,22 @@ public class GameController {
 	@Autowired
 	private IPlateformService plateformService;
 	
+	@Autowired
+	private IEditorService editorService;
+	
+	@Autowired
+	private IGenreService genreService;
+	
+	@Autowired
+	private IClassificationService classificationService;
+	
+	@Autowired
+	private IEconomicModelService economicModelService;
+	
+
+	@Autowired
+	private IModeratorService moderatorService;
+
 	
 	@GetMapping
 	public String getGames(Model model) {
@@ -55,9 +88,31 @@ public class GameController {
 	@GetMapping("/new")
 	public String getCreateForm(Model model) {
 		Game game = new Game();
+		
+		List<Editor> editors = editorService.getEditors();
+		List<Genre> genres = genreService.getGenres();
+		List<Classification> classifications = classificationService.getClassifications();
+		List<Plateform> plateforms = plateformService.getPlateforms();
+		List<EconomicModel> economicModels = economicModelService.getEconomicModels();
+		
 		model.addAttribute("game", game);
-		System.out.println(game);
+		model.addAttribute("editors", editors);
+		model.addAttribute("genres", genres);
+		model.addAttribute("classifications",classifications);
+		model.addAttribute("plateforms",plateforms);
+		model.addAttribute("economicModels",economicModels);
+				
 		return "newGame";
 	}
+	
+	@PostMapping
+	public ModelAndView save(@ModelAttribute Game game) {
+		Moderator moderator = moderatorService.getCurrentModerator();
+		game.setModerator(moderator);
+		gameService.save(game);
+
+		return new ModelAndView("redirect:/game/");
+	}
+	
 	
 }

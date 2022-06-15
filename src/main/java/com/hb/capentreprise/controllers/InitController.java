@@ -66,14 +66,16 @@ public class InitController {
 		
 		Moderator moderator = new Moderator();
 		moderator.setEmail("moderator@mail.com");
-		moderator.setPassword("moderator");
+//		mdp : moderator
+		moderator.setPassword("$2a$12$0Li5a3b2Q9hLFux.1VYs/OcAfnzZ8C4t9C1zyGALzY7aRSKynGcma");
 		moderator.setPhoneNumber("0678452309");
 		moderator.setPseudo("moderator");
 		moderatorService.save(moderator);
 		
 		Moderator moderator2 = new Moderator();
 		moderator2.setEmail("moderator2@mail.com");
-		moderator2.setPassword("moderator2");
+//		mdp : moderator2
+		moderator2.setPassword("$2a$12$eTGT9OOr0SawidnyIrjzRePyoq2pMtQ/DUZsZAtB.xoWzXCUAPlcy");
 		moderator2.setPhoneNumber("0756227856");
 		moderator2.setPseudo("moderator2");
 		moderatorService.save(moderator2);

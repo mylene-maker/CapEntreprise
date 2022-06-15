@@ -19,6 +19,7 @@ import com.hb.capentreprise.entities.InternalRole;
 import com.hb.capentreprise.entities.InternalUser;
 import com.hb.capentreprise.repositories.GamerRepository;
 import com.hb.capentreprise.repositories.ModeratorRepository;
+import com.hb.capentreprise.service.IGamerService;
 
 
 @Service
@@ -28,12 +29,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private GamerRepository gamerRepository;
 	
 	@Autowired
+	private IGamerService gamerService;
+	
+	@Autowired
 	private ModeratorRepository moderatorRepository;
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {
 		InternalUser user = moderatorRepository.findByPseudo(pseudo);
+        if (user == null) {
+             user = gamerService.getGamerByPseudo(pseudo);
+        }
 		if (user == null) {
 			throw new UsernameNotFoundException(pseudo + " not found");
 		}

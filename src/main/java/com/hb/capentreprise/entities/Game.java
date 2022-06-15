@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class Game {
@@ -33,6 +35,7 @@ public class Game {
 	private String description;
 	
 	@Column(nullable = false)
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate releaseDate;
 	
 	@Column(nullable = false,length=9999)
@@ -69,6 +72,8 @@ public class Game {
 		
 	}
 	
+	
+	
 	public Game(Long id, String name, String description, LocalDate releaseDate, String picture, Genre genre,
 			Classification classification, List<Review> reviews, EconomicModel economicModel, List<Plateform> plateforms,
 			Editor editor, Moderator moderator) {
@@ -79,9 +84,7 @@ public class Game {
 		this.releaseDate = releaseDate;
 		this.picture = picture;
 		this.genre = genre;
-
 		this.classification = classification;
-
 		this.reviews = reviews;
 		this.economicModel = economicModel;
 		this.plateforms = plateforms;
