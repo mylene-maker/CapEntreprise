@@ -9,14 +9,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Gamer extends InternalUser {
 	
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthdate;
 	
 	@OneToMany(mappedBy = "gamer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
+
 
 	public Gamer() {
 		
@@ -26,6 +30,15 @@ public class Gamer extends InternalUser {
 		super();
 		this.birthdate = birthdate;
 		this.reviews = reviews;
+	}
+
+	public Gamer(String email, String password, String pseudo, LocalDate birthdate, List<InternalRole> asList) {
+		// TODO Auto-generated constructor stub
+		this.email = email;
+		this.password = password;
+		this.pseudo = pseudo;
+		this.birthdate = birthdate;
+		this.roles = asList;
 	}
 
 	public LocalDate getBirthdate() {

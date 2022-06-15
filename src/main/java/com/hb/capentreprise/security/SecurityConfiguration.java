@@ -44,11 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests()
 		
-		.antMatchers("/inscription").permitAll()
-		.antMatchers("/review", "/score").hasRole("USER")
-		.antMatchers("/review", "/review/delete", "/addGame", "/score","game/new").hasRole("ADMIN")
+
+		.antMatchers("/registration").permitAll()
+		.antMatchers("/review", "/game").hasAnyRole("USER", "ADMIN")
+		.antMatchers( "/review/moderator", "/moderator").hasRole("ADMIN")
 		.and()
-		.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home",true)
+		.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/review",true)
 		.and()
 		.logout().permitAll()
 		.and()

@@ -7,7 +7,8 @@ import com.hb.capentreprise.entities.Moderator;
 
 @Repository
 public interface ModeratorRepository  extends JpaRepository<Moderator, Long>{
-	
+
 	@Query(value = "SELECT * FROM moderator WHERE pseudo = :pseudo", nativeQuery = true)
 	public Moderator findByPseudo(String pseudo);
+	
 }
