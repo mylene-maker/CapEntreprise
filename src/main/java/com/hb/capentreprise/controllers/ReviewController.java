@@ -49,18 +49,58 @@ public class ReviewController {
 		if (gamer == null) {
 			return new ModelAndView("redirect:/review/moderator");
 		}
-		Long gamerId = gamer.getId();
-		List<Review> reviewsToRender = new ArrayList<Review>();
-		List<Review> gamerReviews = reviewService.getReviewsByGamer(gamerId);
-		List<Review> filteredModaratedReviews = reviewService.getFilteredModaratedReviews(gamerId);
-		reviewsToRender.addAll(gamerReviews);
-		reviewsToRender.addAll(filteredModaratedReviews);
-		
-		
-		model.addAttribute("reviews", reviewsToRender);
-		return new ModelAndView("reviews");
+		String sortMethod = "default";
+		return new ModelAndView("redirect:/review/sort/"+sortMethod+"");
 	}
 	
+	
+	@GetMapping("/sort/{sortMethod}")
+	public ModelAndView getReviewsSorted(@PathVariable(name = "sortMethod") String sort,Model model) {
+		Gamer gamer = gamerService.getCurrentGamer();
+		Long gamerId = gamer.getId();
+		List<Review> reviews = new ArrayList<Review>();
+
+	    switch(sort){
+
+	        case "sendDateAsc": 
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateAsc(gamerId));
+	            break;
+
+	        case "sendDateDsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateDsc(gamerId));
+	            break;
+	            
+	        case "gameAsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameAsc(gamerId));
+	            break;
+	            
+	        case "gameDsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameDsc(gamerId));
+	            break;
+	            
+	        case "pseudoAsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoAsc(gamerId));
+	            break;
+
+	        case "pseudoDsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoDsc(gamerId));
+	            break;
+	            
+	        case "noteAsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteAsc(gamerId));
+	            break;
+	            
+	        case "noteDsc":
+	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteDsc(gamerId));
+	            break;
+
+	        default:
+	          	reviews.addAll(reviewService.getModaratedAndGamerReviews(gamerId));
+	            break;
+	    }
+		model.addAttribute("reviews", reviews);
+		return new ModelAndView("reviews");
+	}
 
 	
 	@GetMapping("{id}")
