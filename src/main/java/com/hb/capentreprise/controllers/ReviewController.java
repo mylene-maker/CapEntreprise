@@ -44,8 +44,11 @@ public class ReviewController {
 	private IModeratorService moderatorService;
 	
 	@GetMapping
-	public String getReviews(Model model) {
+	public ModelAndView getReviews(Model model) {
 		Gamer gamer = gamerService.getCurrentGamer();
+		if (gamer == null) {
+			return new ModelAndView("redirect:/review/moderator");
+		}
 		Long gamerId = gamer.getId();
 		List<Review> reviewsToRender = new ArrayList<Review>();
 		List<Review> gamerReviews = reviewService.getReviewsByGamer(gamerId);
@@ -55,7 +58,7 @@ public class ReviewController {
 		
 		
 		model.addAttribute("reviews", reviewsToRender);
-		return "reviews";
+		return new ModelAndView("reviews");
 	}
 	
 
@@ -98,13 +101,13 @@ public class ReviewController {
 		return "moderatorReview";
 	}
 	
-	@GetMapping("{id}/delete")
+	@GetMapping("/moderator/{id}/delete")
 	public ModelAndView delete(@PathVariable(name = "id") Long id) {
 		reviewService.delete(id);
 		return new ModelAndView("redirect:/review/moderator");
 	}
 	
-	@GetMapping("{id}/validate")
+	@GetMapping("/moderator/{id}/validate")
 	public ModelAndView validate(@PathVariable(name = "id") Long id) {
 		Review review = reviewService.getReview(id);
 		review.setModerationDate(LocalDate.now());
