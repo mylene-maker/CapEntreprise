@@ -14,6 +14,7 @@ import com.hb.capentreprise.service.IPlateformService;
 import com.hb.capentreprise.service.IReviewService;
 import com.hb.capentreprise.entities.Game;
 import com.hb.capentreprise.entities.Plateform;
+import com.hb.capentreprise.entities.Review;
 
 
 @Controller
@@ -27,24 +28,36 @@ public class GameController {
 	private IReviewService reviewService;
 	
 	@Autowired
-	private IPlateformService plateformeService;
+	private IPlateformService plateformService;
 	
 	
 	@GetMapping
 	public String getGames(Model model) {
 		List<Game> games = gameService.getGames();
-		model.addAttribute("games", games);
-		
-		List<Plateform> plateformes = plateformeService.getPlateforms();
-		
+		model.addAttribute("games", games);		
 		return "games";
 	}
 	
 	@GetMapping("{id}")
-	public String getGame(@PathVariable(name = "id") Long id, Model model) {
+	public String getGameDetail(@PathVariable(name = "id") Long id, Model model) {
 		Game game = gameService.getGame(id);
 		model.addAttribute("game",game);
+		
+		List<Plateform> plateforms = plateformService.getGamePlateforme(id);
+		model.addAttribute("plateforms",plateforms);
+		
+		List<Review> reviews = reviewService.getReviewsByGame(id);
+		model.addAttribute("reviews",reviews);
+		
 		return "game";
+	}
+	
+	@GetMapping("/new")
+	public String getCreateForm(Model model) {
+		Game game = new Game();
+		model.addAttribute("game", game);
+		System.out.println(game);
+		return "newGame";
 	}
 	
 }

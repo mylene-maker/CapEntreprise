@@ -14,5 +14,7 @@ public interface IPlateformService {
 	public Plateform save(Plateform plateform);
 	
 	public void delete(Long id) throws NotFoundException;
+	
+	public List<Plateform> getGamePlateforme(Long id);
 
 }

@@ -22,12 +22,12 @@ public class Review {
 	private String description;
 	
 	@Column(nullable = false)
-	private LocalDate sendDate;
+	private LocalDate sendDate = LocalDate.now();
 	
 	@Column(nullable = false)
 	private Float note;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private LocalDate moderationDate;
 	
 	
@@ -47,22 +47,20 @@ public class Review {
 		super();
 	}
 	
-	public Review( String description, LocalDate sendDate, Float note, LocalDate moderationDate) {
+	public Review( String description, Float note, LocalDate moderationDate) {
 		super();
 		
 		this.description = description;
-		this.sendDate = sendDate;
 		this.note = note;
 		this.moderationDate = moderationDate;
 	
 	}
 
-	public Review(Long id, String description, LocalDate sendDate, Float note, LocalDate moderationDate, Game game,
+	public Review(Long id, String description,Float note, LocalDate moderationDate, Game game,
 			Gamer gamer, Moderator moderator) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.sendDate = sendDate;
 		this.note = note;
 		this.moderationDate = moderationDate;
 		this.game = game;

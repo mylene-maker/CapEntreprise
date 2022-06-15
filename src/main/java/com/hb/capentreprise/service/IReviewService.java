@@ -21,4 +21,6 @@ public interface IReviewService {
 	
 	public List<Review> getFilteredModaratedReviews(Long id);
 	
+	public List<Review> getReviewsByGame(Long id);
+	
 }

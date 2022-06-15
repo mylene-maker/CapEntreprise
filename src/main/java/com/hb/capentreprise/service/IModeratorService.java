@@ -12,4 +12,8 @@ public interface IModeratorService {
 	public Moderator save(Moderator moderator);
 
 	public void delete(Long id);
+	
+	public Moderator findByPseudo(String pseudo);
+	
+	public Moderator getCurrentModerator();
 }
