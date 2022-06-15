@@ -19,8 +19,24 @@ public interface IReviewService {
 	
 	public List<Review> getReviewsByGamer(Long id);
 	
-	public List<Review> getFilteredModaratedReviews(Long id);
+	public List<Review> getModaratedAndGamerReviews(Long id);
 	
 	public List<Review> getReviewsByGame(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderBySendDateAsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderBySendDateDsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByGameAsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByGameDsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByPseudoAsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByPseudoDsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByNoteAsc(Long id);
+	
+	public  List<Review> getModaratedAndGamerReviewsOrderByNoteDsc(Long id);
 	
 }

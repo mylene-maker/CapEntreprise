@@ -29,6 +29,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private GamerRepository gamerRepository;
 	
 	@Autowired
+	private IGamerService gamerService;
+	
+	@Autowired
 	private ModeratorRepository moderatorRepository;
 	
 	@Autowired
