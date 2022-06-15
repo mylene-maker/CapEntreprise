@@ -20,7 +20,7 @@
 				<td><span th:text="${review.game.name}" /></td>
 				<td><span th:text="${review.gamer.pseudo}" /></td>
 				<td><span th:text="${review.note}" /></td>
-				<td><span th:text="${review.game.picture}" /></td>
+				<td><img th:src="${review.game.picture}" alt="${game.name}" style="width:400px;height:300px"></td>
 				<td><span th:text="${review.description}" /></td>
 			</tr>
 		</tbody>

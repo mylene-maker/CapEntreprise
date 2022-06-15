@@ -1,7 +1,6 @@
 package com.hb.capentreprise.service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 import com.hb.capentreprise.entities.Review;
@@ -38,5 +37,9 @@ public interface IReviewService {
 	public  List<Review> getModaratedAndGamerReviewsOrderByNoteAsc(Long id);
 	
 	public  List<Review> getModaratedAndGamerReviewsOrderByNoteDsc(Long id);
+	
+	public  List<Review> getModeratedReviews();
+	
+	public  List<Review> getUnmoderatedReviews();
 	
 }
