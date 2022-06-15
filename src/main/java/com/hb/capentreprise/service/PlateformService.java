@@ -50,5 +50,12 @@ public class PlateformService implements IPlateformService{
 		}
 	}
 
+	@Override
+	public List<Plateform> getGamePlateforme(Long id) {
+		List<Plateform> plateformes = plateformRepository.findByGameId(id);
+		return plateformes;
+			
+	}
+
 	
 }

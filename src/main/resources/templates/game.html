@@ -24,26 +24,28 @@
 	<br>
 	Editeur : <span th:text="${game.editor.name}" /> 
  	<br>
- 	Plateforme :
+  	Plateforme :
 	<ul>
-		<li th:each="comment: ${game.reviews}">
-			<span th:text="${review.description}"/>
-			<a th:href="@{/comment/{id}/post/{postId}(id=${comment.id}, postId=${post.id})}">Delete</a>
+		<li th:each="plateform : ${game.plateforms}">
+			<span th:text="${plateform.name}"/>
 		</li>	
 	</ul>
 	<br>
 	Avis  :
 	<ul>
-		<li th:each="comment: ${game.reviews}">
-			<span th:text="${review.description}"/>
-			<a th:href="@{/comment/{id}/post/{postId}(id=${comment.id}, postId=${post.id})}">Delete</a>
+		<li th:each="review : ${game.reviews}">
+			DATE :<span th:text="${review.sendDate}"/> </span>	
+			<br>
+			NOTE :<span th:text="${review.note}"/> </span>
+			<br>
+			<span th:text="${review.description}"/></span>
+			<!-- <a th:href="@{/comment/{id}/post/{postId}(id=${comment.id}, postId=${post.id})}">Delete</a> -->
 		</li>	
-	</ul>
-	<br>
-	
-	
-	
-	
-	
+	</ul> 
+
+<a href="/game">retour</a>
+<!-- <a th:href="@{/games.html}">ajouter un jeu</a>
+<a th:href="@{games.html}">ajouter un jeu</a>
+<a href="games.html">ajouter un jeu</a> -->
 </body>
 </html>
