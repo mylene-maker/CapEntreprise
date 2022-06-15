@@ -55,5 +55,11 @@ public class ReviewService implements IReviewService{
 		return (List<Review>) reviews;
 		
 	}
+
+	@Override
+	public List<Review> getReviewsByGame(Long id) {
+		Iterable<Review> reviews = reviewRepository.getReviewsByGame(id);
+		return (List<Review>) reviews;
+		}
 	
 }

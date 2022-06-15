@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+		<form method="game" th:action="@{/game}" th:object="${game}">
+		Nom : <input type="text" th:field="*{name}" /><br /> 
+		Editeur : <input type="text" th:field="*{editor}" /><br /> 
+		Date de sortie : <input type="text" th:field="*{releaseDate}" /><br />
+		Description : <input type="text" th:field="*{description}" /><br />
+		Genre : <input type="text" th:field="*{genre}" /><br />
+		Classification : <input type="text" th:field="*{classification}" /><br />
+		Plateforme : <input type="text" th:field="*{plateforms}" /><br />
+		Modéle économique : <input type="text" th:field="*{economicModel}" /><br />
+		
+		<button type="submit">Create</button>
+	</form>
 </body>
 </html>

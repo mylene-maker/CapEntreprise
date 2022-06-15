@@ -17,4 +17,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 	
 	@Query(value = "SELECT * FROM review WHERE moderation_date IS NOT NULL AND gamer_id != :id", nativeQuery = true)
 	public  List<Review> getFilteredModaratedReviews(Long id);
+	
+	@Query(value = "SELECT * FROM review WHERE game_id = :id", nativeQuery = true)
+	public  List<Review> getReviewsByGame(Long id);
 }

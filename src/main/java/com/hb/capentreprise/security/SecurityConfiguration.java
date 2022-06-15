@@ -30,10 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		// Creation of identifiers
 		
-		/*auth.inMemoryAuthentication()
-		.withUser("Mylene").password(passwordEncoder().encode("saidousseni")).roles("USER")
+		auth.inMemoryAuthentication()
+		.withUser("jo").password(passwordEncoder().encode("jo")).roles("USER")
 		.and()
-		.withUser("useradmin").password(passwordEncoder().encode("admin123")).roles("ADMIN", "USER");*/
+		.withUser("ad").password(passwordEncoder().encode("ad")).roles("ADMIN", "USER");
 	}
 	
 	
