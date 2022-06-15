@@ -9,24 +9,32 @@
 	<div>
 
 
-		<form th:action="@{/registration}" method="post">
+		<form th:action="@{/registration}" method="post" th:object= "${gamer}">
 			<h1>Formulaire d'Inscription</h1>
 			<div>
+				<div th:if="${param.success}">
+					Votre compte a ete cree avec sucees!
+				</div>
+				
 				<p>
-					<label for="username">Pseudonyme</label> <input type="text"
+					<label for="username">Pseudonyme</label> 
+					<input type="text" th:field="*{pseudo}"
 						name="username" id="username" autofocus="autofocus" required>
 				</p>
 				<p>
-					<label for="email">E-mail</label> <input type="text" name="email"
+					<label for="email">E-mail</label> 
+					<input type="text" th:field="*{email}" name="email"
 						id="email" required>
 				</p>
 				<p>
-					<label for="password">Mot De Passe</label> <input type="password"
+					<label for="password">Mot De Passe</label> 
+					<input type="password" th:field="*{password}"
 						name="password" id="password" required>
 				</p>
 				<p>
-					<label for="dateOfBirth">Date de naissance</label> <input
-						type="date" name="dateOfBirth" id="dateOfBirth" required>
+					<label for="birthdate">Date de naissance</label> 
+					<input
+						type="date"  th:field="*{birthdate}" name="birthdate" id="birthdate" required>
 				</p>
 				<p>
 					<input type="submit" value="Inscription">

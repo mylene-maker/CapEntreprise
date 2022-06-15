@@ -23,17 +23,17 @@ public class InternalUser {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String pseudo;
+	protected String pseudo;
 
 	@Column(nullable = false)
-	private String password;
+	protected String password;
 	
 	@Column(nullable = false)
-	private String email;
+	protected String email;
 	
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<InternalRole> roles = new ArrayList<>();
+	protected List<InternalRole> roles = new ArrayList<>();
 
 	public InternalUser() {
 		

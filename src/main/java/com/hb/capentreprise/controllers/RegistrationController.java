@@ -1,20 +1,41 @@
 package com.hb.capentreprise.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hb.capentreprise.dto.GamerDto;
+import com.hb.capentreprise.entities.Gamer;
+import com.hb.capentreprise.service.GamerService;
 
 @Controller
+@RequestMapping("/registration")
 public class RegistrationController {
-	@GetMapping("/registration")
-	public String getRegistrationPage(WebRequest request, Model model) {
+	
+	private GamerService gamerService;
+	
+	
+	public RegistrationController( GamerService gamerService ) {
 		
-		GamerDto gamerDto = new GamerDto();
-		model.addAttribute("gamer", gamerDto);
-		
+		super();
+		this.gamerService = gamerService;
+	}
+	
+	@ModelAttribute("gamer")
+	public Gamer gamerRegistration() {
+		return new Gamer();
+	}
+	
+	@GetMapping
+	public String showRegistrationForm() {
 		return "registration";
+	}
+	
+	@PostMapping
+	public String registerUserAccount(@ModelAttribute("gamer") Gamer gamer) {
+		
+		gamerService.save(gamer);
+		return "redirect:/registration?success";
 	}
 }

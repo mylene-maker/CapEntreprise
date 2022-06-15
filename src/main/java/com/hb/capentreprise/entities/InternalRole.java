@@ -18,6 +18,7 @@ public class InternalRole {
 	@Column(nullable = false, unique = true)
 	private String name;
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -40,6 +41,12 @@ public class InternalRole {
 
 	public InternalRole(String name) {
 		super();
+		this.name = name;
+	}
+
+	public InternalRole(Integer id, String name) {
+		super();
+		this.id = id;
 		this.name = name;
 	}
 	
