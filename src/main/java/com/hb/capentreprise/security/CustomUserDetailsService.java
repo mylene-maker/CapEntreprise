@@ -29,15 +29,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	private ModeratorRepository moderatorRepository;
+	
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {
 		InternalUser user = moderatorRepository.findByPseudo(pseudo);
+		InternalUser gamer = gamerRepository.findByPseudo(pseudo);
 		if (user == null) {
 			throw new UsernameNotFoundException(pseudo + " not found");
 		}
 		User userDetails = new User(user.getPseudo(), user.getPassword(), getGrantedAuthorities(user.getRoles()));
+
 		return userDetails;
 	}
 

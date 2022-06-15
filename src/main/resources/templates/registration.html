@@ -9,7 +9,7 @@
 	<div>
 
 
-		<form th:action="@{/inscription}" method="post">
+		<form th:action="@{/registration}" method="post">
 			<h1>Formulaire d'Inscription</h1>
 			<div>
 				<p>
@@ -32,6 +32,8 @@
 					<input type="submit" value="Inscription">
 				</p>
 			</div>
+			</form>
+			<a th:href="@{/login}">Se connecter</a>
 	</div>
 
 

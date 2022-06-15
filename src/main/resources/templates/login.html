@@ -11,7 +11,7 @@
 		<h1> Formulaire de Connexion </h1>
 		
 		<div th:if="${param.error}">
-			<p> [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]] </p>
+			  Invalid username or password.
 		</div>
 		<div th:if="${param.logout}">
 			<p>Vous êtes déconnecter !</p>
