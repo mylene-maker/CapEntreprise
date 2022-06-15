@@ -50,8 +50,8 @@ public class ReviewService implements IReviewService{
 		
 	}
 	
-	public  List<Review> getFilteredModaratedReviews(Long id) {
-		Iterable<Review> reviews = reviewRepository.getFilteredModaratedReviews(id);
+	public  List<Review> getModaratedAndGamerReviews(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviews(id);
 		return (List<Review>) reviews;
 		
 	}
@@ -61,5 +61,53 @@ public class ReviewService implements IReviewService{
 		Iterable<Review> reviews = reviewRepository.getReviewsByGame(id);
 		return (List<Review>) reviews;
 		}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderBySendDateAsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderBySendDateAsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderBySendDateDsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderBySendDateDsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByGameAsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByGameAsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByGameDsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByGameDsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByPseudoAsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByPseudoAsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByPseudoDsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByPseudoDsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByNoteAsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByNoteAsc(id);
+		return (List<Review>) reviews;
+	}
+
+	@Override
+	public List<Review> getModaratedAndGamerReviewsOrderByNoteDsc(Long id) {
+		Iterable<Review> reviews = reviewRepository.getModaratedAndGamerReviewsOrderByNoteDsc(id);
+		return (List<Review>) reviews;
+	}
 	
 }
