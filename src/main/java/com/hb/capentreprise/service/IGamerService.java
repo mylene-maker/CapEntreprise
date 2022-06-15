@@ -13,4 +13,8 @@ public interface IGamerService {
 	public Gamer save(Gamer gamer);
 
 	public void delete(Long id);
+	
+	public Gamer getGamerByPseudo(String pseudo);
+	
+	public Gamer getCurrentGamer();
 }
