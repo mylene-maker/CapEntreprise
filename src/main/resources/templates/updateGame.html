@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+			<h1>Mise à jour d'un jeu</h1>
+		<form method="post" th:action="@{/game}" th:object="${game}">
+		<label for="name">Nom : </label>
+		<input type="text" th:field="*{name}" id="name"/>
+		
+		<br/>
+		
+		<label for="picture">Url de l'image : </label>
+		<input type="text" th:field="*{picture}"  id="picture"/>
+		
+		<br/>
+		
+	    <label for="editeur-select">Sélectionnez un éditeur : </label>
+		<select th:field="*{editor}" id="editeur-select"> 
+		<option th:each="editor : ${editors}" th:value="${editor.id}" th:text="${editor.name}"></option></select>
+		
+        <br/>
+        
+		<label for="releaseDate">Date de sortie : </label>
+	    <input type="date" th:field="*{releaseDate}" th:value="${#dates.format(releaseDate, 'yyyy-MM-dd')}"/ id="releaseDate">
+		
+		<br/>
+		
+		<label for="description">Description : </label>
+		<textarea id="description" th:field="*{description}" ></textarea>
+		
+		<br/>
+		<label for="genre-select">Genre : </label>
+		<select th:field="*{genre}" id="genre-select"> 
+		<option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option></select>
+		
+		<br/>
+		
+		<label for="classification-select">Classification : </label>
+		<select th:field="*{classification}" id="classification-select"> 
+		<option th:each="classification : ${classifications}" th:value="${classification.id}" th:text="${classification.name}"></option></select>
+		
+		<br/>
+		
+		<label for="plateform-select">Plateforme : </label>
+		<select th:field="*{plateforms}" id="plateform-select"> 
+		<option th:each="plateform : ${plateforms}" th:value="${plateform.id}" th:text="${plateform.name}"></option></select>
+		
+		
+		<br/>
+	
+		<label for="economicModel-select">Modéle économique : </label>
+		<select th:field="*{economicModel}" id="economicModel-select" multiple="multiple"> 
+		<option th:each="economicModel : ${economicModels}" th:value="${economicModel.id}" th:text="${economicModel.name}"></option></select>
+				
+		<br/>
+		
+		<button type="submit">Create</button>
+	</form>
+	
+	<a th:href="@{/game}">liste des jeux</a>
+</body>
+</html>

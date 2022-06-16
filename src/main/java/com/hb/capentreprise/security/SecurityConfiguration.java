@@ -46,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 
 		.antMatchers("/registration").permitAll()
-		.antMatchers("/review", "/game").hasAnyRole("USER", "ADMIN")
-		.antMatchers( "/review/moderator", "/moderator").hasRole("ADMIN")
+//		.antMatchers("/review", "/game").hasAnyRole("USER", "ADMIN")
+//		.antMatchers( "/review/moderator", "/moderator").hasRole("ADMIN")
 		.and()
 		.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/review",true)
 		.and()
