@@ -2,6 +2,7 @@ package com.hb.capentreprise.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.management.relation.Role;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.hb.capentreprise.entities.Gamer;
 import com.hb.capentreprise.entities.InternalRole;
 import com.hb.capentreprise.repositories.GamerRepository;
+import com.hb.capentreprise.repositories.InternalRoleRepository;
 import com.hb.capentreprise.security.CustomUserDetailsService;
 
 @Service
@@ -23,6 +25,8 @@ public class GamerService implements IGamerService {
 	@Autowired
 	private GamerRepository gamerRepo;
 	
+	@Autowired
+	private InternalRoleRepository InternalRoleRepo;
 	
 
 	@Override
@@ -38,12 +42,16 @@ public class GamerService implements IGamerService {
 		return gamers;
 	}
 
+	public InternalRole getRole() {
+		Optional<InternalRole> gamerRole = InternalRoleRepo.findById(2) ;
+		return gamerRole.get();
+	}
+	
 	@Override
 	public Gamer save(Gamer gamer) {
 		
 		Gamer gamerSaved = new Gamer(gamer.getEmail(), new BCryptPasswordEncoder().encode(gamer.getPassword()), gamer.getPseudo(),
-				gamer.getBirthdate(), Arrays.asList(new InternalRole(2, "ROLE_USER")));
-		
+				gamer.getBirthdate(), Arrays.asList(getRole()));
 		return gamerRepo.save(gamerSaved);
 	}
 

@@ -27,6 +27,8 @@
 			</tr>
 		</tbody>
 	</table>
-<a href="#">Déconnexion</a>
+<form form-method="post" th:action="@{/logout}">
+	<button type="submit">Déconnection</button>
+</form>
 </body>
 </html>

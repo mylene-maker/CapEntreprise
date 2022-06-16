@@ -44,6 +44,10 @@
 		</tbody>
 	</table>
 <a th:href="@{/review/new}">Ajouter un avis</a>
-<a href="#">Déconnexion</a>
+
+<form form-method="post" th:action="@{/logout}">
+	<button type="submit">Déconnection</button>
+</form>
+
 </body>
 </html>
