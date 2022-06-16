@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>New review</title>
+ <link th:href="@{/styles/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 <form method="post" th:action="@{/review}" th:object="${review}">
@@ -12,6 +13,7 @@
 			<option th:each="game : ${games}" th:value="${game.id}"
 				th:text="${game.name}"></option>
 			</select></br>
+			 <p th:if="${#fields.hasErrors('game')}" th:class="${#fields.hasErrors('game')}? error">Veuillez sélectionner un jeu.</p>
 			<label for="description">Description</label>
 		  <textarea  rows="5"
 		  			id="description"			
@@ -19,7 +21,9 @@
                       th:field="*{description}"
                       required="required">
           </textarea></br>
+          <p th:if="${#fields.hasErrors('*{description}')}" th:class="${#fields.hasErrors('*{description}')}? error" >Veuillez rentrer une description entre 10 et 100 caractères.</p>
           <label for="note">Note</label>
+          <p th:if="${#fields.hasErrors('note')}" th:class="${#fields.hasErrors('note')}? error">La note doit être comprise entre 0 et 20.</p>
 		<input type="number" min=0 max=20 th:field="*{note}" id="note" /></br>
 		<button type="submit">Enregistrer</button>
 	</form>

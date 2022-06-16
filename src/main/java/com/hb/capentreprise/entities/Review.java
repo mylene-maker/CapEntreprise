@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Entity
 public class Review {
@@ -18,23 +24,29 @@ public class Review {
 	@Column(name = "review_id")
 	private Long id;
 	
+	@NotEmpty(message = "Description is mandatory")
+	@Size(min = 10, max = 100)
 	@Column(nullable = false)
 	private String description;
 	
 	@Column(nullable = false)
 	private LocalDate sendDate = LocalDate.now();
 	
+	@NotNull(message = "Note is mandatory")
+	@Min(value = 0, message = "must be greater than or equal to zero")
+	@Max(value = 10, message = "must be less than or equal to 10")
 	@Column(nullable = false)
 	private Float note;
 	
 	@Column(nullable = true)
 	private LocalDate moderationDate;
 	
-	
+	@NotNull(message = "Game is mandatory")
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
 	
+	@NotNull(message = "Gamer is mandatory")
 	@ManyToOne
 	@JoinColumn(name = "gamer_id")
 	private Gamer gamer;
