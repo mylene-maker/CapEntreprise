@@ -6,12 +6,17 @@
 </head>
 <body>
 
+<a th:if="${filterMethod}" th:href="@{/review/moderator}"><button>Afficher tous les avis</button></a>
+<a th:if="${filterMethod == 'notModarated' || filterMethod == null}" th:href="@{/review/moderator/filter/{filterMethod}(filterMethod='modarated')}"><button>Afficher les avis modérés</button></a>
+<a th:if="${filterMethod == 'modarated' || filterMethod == null}" th:href="@{/review/moderator/filter/{filterMethod}(filterMethod='notModarated')}"><button>Afficher les avis à modérer</button></a>
+
 <table>
 		<thead>
 			<th>Date d'envoi</th>
 			<th>Nom du jeu</th>
 			<th>Pseudo du Joueur</th>
 			<th>Statut</th>
+			<th>Date de modération</th>
 			<th>Opérations</th>
 		</thead>
 		<tbody>
@@ -23,10 +28,16 @@
 				 <span th:if="${review.moderator}">Modéré par <span th:text="${review.moderator.pseudo}" /></span>
     			<span th:unless="${review.moderator}">A modérer</span>
     			</td>
+    			<td>
+				 <span th:if="${review.moderationDate}"><span th:text="${review.moderationDate}" /></span>
+    			<span th:unless="${review.moderationDate}">Néant</span>
+    			</td>
 				<td><a th:href="@{/review/moderator/{id}(id=${review.id})}">Voir</a></td>
 			</tr>
 		</tbody>
 	</table>
-<a href="#">Déconnexion</a>
+<form form-method="post" th:action="@{/logout}">
+	<button type="submit">Déconnection</button>
+</form>
 </body>
 </html>

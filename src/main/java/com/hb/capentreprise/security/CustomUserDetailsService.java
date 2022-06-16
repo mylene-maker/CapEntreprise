@@ -34,6 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private ModeratorRepository moderatorRepository;
 	
+
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {

@@ -13,6 +13,7 @@
 			<th>Pseudo du Joueur</th>
 			<th>Note</th>
 			<th>Description</th>
+			<th>Statut</th>
 			<th>Opérations</th>
 		</thead>
 		<tbody>
@@ -23,11 +24,11 @@
 				<td><span th:text="${review.note}" /></td>
 				<td><span th:text="${review.description}" /></td>
 				<td>
-				 <span th:if="${review.moderator}">Modéré par <span th:text="${review.moderator.pseudo}" /></span>
+				 <span th:if="${review.moderator}">Modéré par <span th:text="${review.moderator.pseudo}" /> le <span th:text="${review.moderationDate}" /></span>
     			<span th:unless="${review.moderator}">A modérer</span>
     			</td>
-				<td><a  th:unless="${review.moderator}" th:href="@{/review/{id}/validate (id=${review.id})}">Valider</a></br>
-					<a  th:href="@{/review/{id}/delete (id=${review.id})}">Supprimer</a>
+				<td><a  th:unless="${review.moderator}" th:href="@{/review/moderator/{id}/validate (id=${review.id})}">Valider</a></br>
+					<a  th:href="@{/review/moderator/{id}/delete (id=${review.id})}">Supprimer</a>
 				</td>
 			</tr>
 		</tbody>
