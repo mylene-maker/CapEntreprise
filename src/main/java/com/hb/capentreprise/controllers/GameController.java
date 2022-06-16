@@ -105,14 +105,46 @@ public class GameController {
 		return "newGame";
 	}
 	
+	@GetMapping("/update/{id}")
+	public String getUpdateForm(@PathVariable(name = "id") Long id, Model model) {
+		Game game = gameService.getGame(id);
+		List<Editor> editors = editorService.getEditors();
+		List<Genre> genres = genreService.getGenres();
+		List<Classification> classifications = classificationService.getClassifications();
+		List<Plateform> plateforms = plateformService.getPlateforms();
+		List<EconomicModel> economicModels = economicModelService.getEconomicModels();
+		
+		model.addAttribute("game", game);
+		model.addAttribute("editors", editors);
+		model.addAttribute("genres", genres);
+		model.addAttribute("classifications",classifications);
+		model.addAttribute("plateforms",plateforms);
+		model.addAttribute("economicModels",economicModels);
+		return "updateGame";
+	}
+	
+	
 	@PostMapping
 	public ModelAndView save(@ModelAttribute Game game) {
+		
+		if (game.getId() == null) {
+			System.out.println(game);
+		} else {
+		
 		Moderator moderator = moderatorService.getCurrentModerator();
 		game.setModerator(moderator);
 		gameService.save(game);
+		}
 
 		return new ModelAndView("redirect:/game/");
 	}
 	
+	@GetMapping("/delete/{id}")
+	public ModelAndView delete(@PathVariable(name = "id") Long id) {
+		gameService.delete(id);
+		return new ModelAndView("redirect:/game");
+	}
 	
+	
+
 }

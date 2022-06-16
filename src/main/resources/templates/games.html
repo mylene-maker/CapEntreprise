@@ -20,7 +20,11 @@
 				<img th:src="${game.picture}" alt="${game.name}" style="width:200px;height:100px">
 				<td><a th:href="@{/game/}+${game.id}"><span th:text="${game.name}" /></a></td>
 				<td><span th:text="${game.editor.name}" /></td>
-				<td><span/> opérations à ajouter  </td>
+ 				<td><span/> 
+				<a th:href="@{/game/update/{id}(id=${game.id})}">update</a>
+				
+				<a th:href="@{/game/delete/{id}(id=${game.id})}">delete</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
