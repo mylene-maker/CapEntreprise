@@ -2,12 +2,20 @@ package com.hb.capentreprise.controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -120,7 +128,10 @@ public class ReviewController {
 	}
 	
 	@PostMapping
-	public ModelAndView save(@ModelAttribute Review review) {
+	public ModelAndView save(@Valid Review review, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return new ModelAndView("newReview");
+		}
 		Gamer gamer = gamerService.getCurrentGamer();
 		review.setGamer(gamer);
 		reviewService.save(review);
@@ -130,6 +141,8 @@ public class ReviewController {
 	@GetMapping("/moderator")
 	public String getAllReviews(Model model) {
 		List<Review> reviews = reviewService.getReviews();
+		String filterMethod = null;
+		model.addAttribute("filterMethod", filterMethod);
 		model.addAttribute("reviews", reviews);
 		return "moderatorReviews";
 	}
@@ -147,6 +160,7 @@ public class ReviewController {
 			break;
 		}
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("filterMethod", filterMethod);
 		return "moderatorReviews";
 	}
 	
