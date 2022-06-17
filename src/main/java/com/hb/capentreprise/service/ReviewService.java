@@ -1,5 +1,6 @@
 package com.hb.capentreprise.service;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -7,6 +8,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hb.capentreprise.entities.Review;
@@ -121,5 +126,24 @@ public class ReviewService implements IReviewService{
 		Iterable<Review> reviews = reviewRepository.getUnmoderatedReviews();
 		return (List<Review>) reviews;
 	}
+	
+	 public Page<Review> findPaginated(Pageable pageable, List<Review> reviews) {
+	        int pageSize = pageable.getPageSize();
+	        int currentPage = pageable.getPageNumber();
+	        int startItem = currentPage * pageSize;
+	        List<Review> list;
+
+	        if (reviews.size() < startItem) {
+	            list = Collections.emptyList();
+	        } else {
+	            int toIndex = Math.min(startItem + pageSize, reviews.size());
+	            list = reviews.subList(startItem, toIndex);
+	        }
+
+	        Page<Review> reviewPage
+	          = new PageImpl<Review>(list, PageRequest.of(currentPage, pageSize), reviews.size());
+
+	        return reviewPage;
+	    }
 	
 }

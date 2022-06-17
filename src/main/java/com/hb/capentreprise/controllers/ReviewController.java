@@ -6,10 +6,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hb.capentreprise.entities.Game;
@@ -63,50 +69,64 @@ public class ReviewController {
 	
 	
 	@GetMapping("/sort/{sortMethod}")
-	public ModelAndView getReviewsSorted(@PathVariable(name = "sortMethod") String sort,Model model) {
+	public ModelAndView getReviewsSorted(@PathVariable(name = "sortMethod") String sort,Model model, @RequestParam("page")  Optional<Integer> page, 
+			@RequestParam("size")  Optional<Integer> size) {
 		Gamer gamer = gamerService.getCurrentGamer();
 		Long gamerId = gamer.getId();
 		List<Review> reviews = new ArrayList<Review>();
+			switch(sort){
 
-	    switch(sort){
+			case "sendDateAsc": 
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateAsc(gamerId));
+				break;
 
-	        case "sendDateAsc": 
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateAsc(gamerId));
-	            break;
+			case "sendDateDsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateDsc(gamerId));
+				break;
+        
+			case "gameAsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameAsc(gamerId));
+				break;
+        
+			case "gameDsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameDsc(gamerId));
+				break;
+        
+			case "pseudoAsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoAsc(gamerId));
+				break;
 
-	        case "sendDateDsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderBySendDateDsc(gamerId));
-	            break;
-	            
-	        case "gameAsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameAsc(gamerId));
-	            break;
-	            
-	        case "gameDsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByGameDsc(gamerId));
-	            break;
-	            
-	        case "pseudoAsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoAsc(gamerId));
-	            break;
+			case "pseudoDsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoDsc(gamerId));
+				break;
+        
+			case "noteAsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteAsc(gamerId));
+				break;
+        
+			case "noteDsc":
+				reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteDsc(gamerId));
+				break;
 
-	        case "pseudoDsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByPseudoDsc(gamerId));
-	            break;
-	            
-	        case "noteAsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteAsc(gamerId));
-	            break;
-	            
-	        case "noteDsc":
-	        	reviews.addAll(reviewService.getModaratedAndGamerReviewsOrderByNoteDsc(gamerId));
-	            break;
+			default:
+				reviews.addAll(reviewService.getModaratedAndGamerReviews(gamerId));
+				break;
+			}
+		System.out.println("page :"+page);
+		 int currentPage = page.orElse(1);
+		 System.out.println("page courrante:"+currentPage);
+	        int pageSize = size.orElse(5);
+	        Page<Review> reviewPage = reviewService.findPaginated(PageRequest.of(currentPage - 1, pageSize),reviews);
 
-	        default:
-	          	reviews.addAll(reviewService.getModaratedAndGamerReviews(gamerId));
-	            break;
-	    }
-		model.addAttribute("reviews", reviews);
+	        model.addAttribute("reviewPage", reviewPage);
+	        
+	        int totalPages = reviewPage.getTotalPages();
+	        if (totalPages > 0) {
+	            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+	                .boxed()
+	                .collect(Collectors.toList());
+	            model.addAttribute("pageNumbers", pageNumbers);
+	        }
 		return new ModelAndView("reviews");
 	}
 
@@ -130,6 +150,8 @@ public class ReviewController {
 	@PostMapping
 	public ModelAndView save(@Valid Review review, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			List<Game> games = gameService.getGames();
+			model.addAttribute("games", games);
 			return new ModelAndView("newReview");
 		}
 		Gamer gamer = gamerService.getCurrentGamer();

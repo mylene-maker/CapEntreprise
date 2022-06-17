@@ -2,6 +2,8 @@ package com.hb.capentreprise.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.hb.capentreprise.entities.Review;
 
@@ -41,5 +43,7 @@ public interface IReviewService {
 	public  List<Review> getModeratedReviews();
 	
 	public  List<Review> getUnmoderatedReviews();
+	
+	public Page<Review> findPaginated(Pageable pageable, List<Review> reviews);
 	
 }

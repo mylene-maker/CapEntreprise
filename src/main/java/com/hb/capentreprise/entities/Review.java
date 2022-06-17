@@ -46,7 +46,7 @@ public class Review {
 	@JoinColumn(name = "game_id")
 	private Game game;
 	
-	@NotNull(message = "Gamer is mandatory")
+
 	@ManyToOne
 	@JoinColumn(name = "gamer_id")
 	private Gamer gamer;
