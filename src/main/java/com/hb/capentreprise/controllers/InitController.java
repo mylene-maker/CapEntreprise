@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,9 +18,11 @@ import com.hb.capentreprise.entities.Editor;
 import com.hb.capentreprise.entities.Game;
 import com.hb.capentreprise.entities.Gamer;
 import com.hb.capentreprise.entities.Genre;
+import com.hb.capentreprise.entities.InternalRole;
 import com.hb.capentreprise.entities.Moderator;
 import com.hb.capentreprise.entities.Plateform;
 import com.hb.capentreprise.entities.Review;
+import com.hb.capentreprise.repositories.InternalRoleRepository;
 import com.hb.capentreprise.service.IClassificationService;
 import com.hb.capentreprise.service.IEconomicModelService;
 import com.hb.capentreprise.service.IEditorService;
@@ -31,6 +34,7 @@ import com.hb.capentreprise.service.IPlateformService;
 import com.hb.capentreprise.service.IReviewService;
 
 @Controller
+@Transactional
 public class InitController {
 	
 	@Autowired
@@ -59,9 +63,27 @@ public class InitController {
 	
 	@Autowired
 	private IReviewService reviewService;
+	
+	@Autowired
+	private InternalRoleRepository internalRoleRepository;
 		
 	@GetMapping("/init")
 	public void initData() throws NotFoundException {
+		
+		InternalRole roleAdmin = new InternalRole();
+		roleAdmin.setName("ADMIN");
+		internalRoleRepository.save(roleAdmin);
+		
+		InternalRole roleUser = new InternalRole();
+		roleUser.setName("USER");
+		internalRoleRepository.save(roleUser);
+		
+		List<InternalRole> roles = new ArrayList<InternalRole>();
+		roles.add(roleAdmin);
+		roles.add(roleUser);
+		
+		List<InternalRole> role = new ArrayList<InternalRole>();
+		role.add(roleUser);
 		
 		
 		Moderator moderator = new Moderator();
@@ -70,6 +92,7 @@ public class InitController {
 		moderator.setPassword("$2a$12$0Li5a3b2Q9hLFux.1VYs/OcAfnzZ8C4t9C1zyGALzY7aRSKynGcma");
 		moderator.setPhoneNumber("0678452309");
 		moderator.setPseudo("moderator");
+		moderator.setRoles(roles);
 		moderatorService.save(moderator);
 		
 		Moderator moderator2 = new Moderator();
@@ -78,6 +101,7 @@ public class InitController {
 		moderator2.setPassword("$2a$12$eTGT9OOr0SawidnyIrjzRePyoq2pMtQ/DUZsZAtB.xoWzXCUAPlcy");
 		moderator2.setPhoneNumber("0756227856");
 		moderator2.setPseudo("moderator2");
+		moderator2.setRoles(roles);
 		moderatorService.save(moderator2);
 		
 		Gamer gamer  =new Gamer();
@@ -86,6 +110,7 @@ public class InitController {
 		gamer.setEmail("gamer@mail.com");
 		gamer.setPassword("gamer");
 		gamer.setPseudo("gamer");
+		gamer.setRoles(role);
 		gamerService.save(gamer);
 		
 		Gamer gamer2  =new Gamer();
@@ -94,6 +119,7 @@ public class InitController {
 		gamer2.setEmail("gamer2@mail.com");
 		gamer2.setPassword("gamer2");
 		gamer2.setPseudo("gamer2");
+		gamer2.setRoles(role);
 		gamerService.save(gamer2);
 		
 		
@@ -194,6 +220,8 @@ public class InitController {
 		game2.setReleaseDate(releaseGame2);
 		gameService.save(game2);
 
+		
+		/*
 		Review review1 = new Review();
 		review1.setDescription("review 1");
 		review1.setSendDate(LocalDate.now());
@@ -214,9 +242,8 @@ public class InitController {
 		review2.setGamer(gamer2);
 		review2.setModerator(moderator2);
 		reviewService.save(review2);
-		
-								
-
+		*/
+			
 	}
 	
 }

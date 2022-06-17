@@ -125,19 +125,19 @@ public class GameController {
 	
 	
 	@PostMapping
-	public ModelAndView save(@ModelAttribute Game game) {
-		
-		if (game.getId() == null) {
-			System.out.println(game);
-		} else {
-		
-		Moderator moderator = moderatorService.getCurrentModerator();
-		game.setModerator(moderator);
-		gameService.save(game);
-		}
+    public ModelAndView save(@ModelAttribute Game game) {
+//        Game gameTemp = gameService.getGame(game.getId());
+//        if (game.getId() != null) {
+//            gameService.updateGame(gameTemp);
+//        } else {
 
-		return new ModelAndView("redirect:/game/");
-	}
+        Moderator moderator = moderatorService.getCurrentModerator();
+        game.setModerator(moderator);
+        gameService.save(game);
+//        }
+
+        return new ModelAndView("redirect:/game/");
+    }
 	
 	@GetMapping("/delete/{id}")
 	public ModelAndView delete(@PathVariable(name = "id") Long id) {

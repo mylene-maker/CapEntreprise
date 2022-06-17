@@ -29,7 +29,7 @@
 			<th>Opérations</th>
 		</thead>
 		<tbody>
-			<tr th:each="review: ${reviews}">
+			<tr th:each="review, iStat : ${reviewPage.content}">
 				<td><span th:text="${review.sendDate}"/></td>
 				<td><span th:text="${review.game.name}" /></td>
 				<td><span th:text="${review.gamer.pseudo}" /></td>
@@ -43,10 +43,16 @@
 			</tr>
 		</tbody>
 	</table>
+	<div th:if="${reviewPage.totalPages > 0}" class="pagination"
+    th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/review/sort/{sortMethod}(size=${reviewPage.size}, page=${pageNumber})}"
+        th:text=${pageNumber}
+        th:class="${pageNumber==reviewPage.number + 1} ? active"></a>
+</div>
 <a th:href="@{/review/new}">Ajouter un avis</a>
 
 <form form-method="post" th:action="@{/logout}">
-	<button type="submit">Déconnection</button>
+	<button type="submit">Déconnexion</button>
 </form>
 
 </body>
